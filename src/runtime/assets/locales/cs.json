@@ -1,0 +1,81 @@
+{
+  "$": {
+    "btn": {
+      "logout": "Odhlásit"
+    },
+    "login": {
+      "title": "Přihlaste se do svého účtu",
+      "description": "Login description",
+      "keywords": "Login keywords",
+      "label": "Přihlásit",
+      "remember": "Pamatuj si mě",
+      "signin": "Přihlásit se",
+      "no_account": "Ještě nemáte účet?",
+      "or": "nebo"
+    },
+    "signup": {
+      "title": "Vytvořit účet",
+      "description": "Signup description",
+      "keywords": "Signup keywords",
+      "label": "Registrovat",
+      "confirm_password": "Potvrdit heslo",
+      "accept_condition": "Souhlasím s",
+      "has_account": "Již máte účet?"
+    },
+    "forgot_password": {
+      "title": "Zapomněli jste heslo?",
+      "description": "Nemějte obavy! Stačí zadat svůj e-mail a my vám pošleme kód k resetování hesla!",
+      "keywords": "Zapomenute heslo keywords",
+      "reset_password": "Obnovit heslo",
+      "success_msg": "E-mail pro reset hesla byl odeslán."
+    },
+    "terms_conditions": {
+      "title": "Podmínky použití",
+      "description": "Podmínky použití description",
+      "keywords": "Podmínky použití keywords"
+    },
+    "profile": {
+      "title": "Upravit profil",
+      "description": "Profile description",
+      "keywords": "Profile keywords",
+      "newsletter": "Odesílání týdenních zpráv s porovnáním předpovědi a skutečných cen",
+      "change_password": "Změnit heslo",
+      "success_msg": "Uživatel byl úspěšně upraven"
+    },
+    "message": {
+      "unauthorized": "Neoprávněný",
+      "incorrect_login": "Nesprávné přihlašovací údaje",
+      "user_exist": "Uživatel již existuje",
+      "user_not_exists": "Uživatel neexistuje",
+      "password_min": "Musí obsahovat alespoň {count} znaků",
+      "password_not_match": "Hesla se neshodují"
+    },
+    "mailing": {
+      "addressed": "Vážený zákazníku",
+      "regards": "S pozdravem",
+      "team": "Skeleton tým",
+      "reserved": "Všechna práva vyhrazena",
+      "signup": {
+        "subject": "Potvrzení registrace",
+        "thank_you": "Děkujeme Vám za registraci na naší platformě.",
+        "success_done": "Vaše registrace byla úspěšně dokončena a Váš účet byl aktivován.",
+        "further_questions": "Pokud máte jakékoli dotazy ohledně používání našich služeb nebo potřebujete pomoc, neváhejte nás kontaktovat. Jsme tu pro Vás."
+      },
+      "forgot_password": {
+        "subject": "Reset hesla",
+        "request_password": "Obdrželi jsme žádost o resetování hesla k vašemu účtu.",
+        "new_password": "Bylo vygenerováno nové heslo pro váš účet.",
+        "contact_us": "Pokud jste o nové heslo nežádal/a, kontaktujte nás okamžitě.",
+        "further_questions": "Pokud máte nějaké další otázky nebo potřebujete pomoc, neváhejte nás kontaktovat."
+      },
+      "form": {
+        "submit": "Odeslat",
+        "email": "E-mail",
+        "password": "Heslo",
+        "given_name": "Křestní jméno",
+        "family_name": "Příjmení",
+        "realm": "Realm"
+      }
+    }
+  }
+}

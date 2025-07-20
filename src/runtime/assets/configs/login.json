@@ -1,0 +1,32 @@
+{
+  "syscode": "login",
+  "fields": [
+    {
+      "name": "email",
+      "type": "email",
+      "label": "$.form.email",
+      "placeholder": "john@doe.com",
+      "required": true,
+      "clearable": true,
+      "size": "lg",
+      "value": ""
+    },
+    {
+      "name": "password",
+      "type": "password",
+      "label": "$.form.password",
+      "placeholder": "john@doe.com",
+      "required": true,
+      "clearable": true,
+      "minLength": 8,
+      "size": "lg",
+      "value": ""
+    },
+    {
+      "name": "remember",
+      "type": "checkbox",
+      "label": "$.login.remember",
+      "value": false
+    }
+  ]
+}
