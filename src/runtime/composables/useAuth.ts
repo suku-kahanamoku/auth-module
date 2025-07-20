@@ -17,6 +17,28 @@ export const useAuthStore: StoreDefinition = defineStore("AuthStore", () => {
   const config = useRuntimeConfig().public?.authModule as any;
   const protectedPages = config.protectedPages || [];
 
+  // Prázdný uživatel podle IUser
+  const emptyUser = {
+    _id: "",
+    email: "",
+    name: "",
+    surname: "",
+    givenName: "",
+    password: "",
+    tempPassword: "",
+    terms: false,
+    newsletter: false,
+    role: "guest",
+    address: {
+      main: undefined,
+      variants: [],
+    },
+    phone: "",
+    createdAt: undefined,
+    updatedAt: undefined,
+    valid: false,
+  };
+
   const initials = computed(
     () =>
       `${
@@ -104,5 +126,6 @@ export const useAuthStore: StoreDefinition = defineStore("AuthStore", () => {
     resetPassword,
     ...userSessionStore,
     initials,
+    emptyUser,
   };
 });
