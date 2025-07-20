@@ -8,8 +8,9 @@ import {
   computed,
   useRuntimeConfig,
 } from "#imports";
+import type { StoreDefinition } from "pinia";
 
-export const useAuthStore = defineStore("AuthStore", () => {
+export const useAuthStore: StoreDefinition = defineStore("AuthStore", () => {
   const localePath = useLocalePath();
   const { routes } = useMenuItems();
   const userSessionStore = useUserSession();
