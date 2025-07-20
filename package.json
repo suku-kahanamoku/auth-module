@@ -13,6 +13,10 @@
     "./types": {
       "types": "./dist/runtime/types.d.ts",
       "import": "./dist/runtime/types.d.ts"
+    },
+    "./models": {
+      "types": "./dist/runtime/models/index.d.ts",
+      "import": "./dist/runtime/models/index.js"
     }
   },
   "main": "./dist/module.mjs",
