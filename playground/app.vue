@@ -1,5 +1,12 @@
+<script setup lang="ts">
+const {
+  i18n: { locale },
+} = useLang();
+</script>
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <UApp>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </UApp>
 </template>

@@ -53,6 +53,7 @@
     "@suku-kahanamoku/ui-module": "latest",
     "bcrypt": "^5.1.1",
     "defu": "^6.1.4",
+    "jwt-decode": "^4.0.0",
     "nuxt-auth-utils": "^0.5.20"
   },
   "devDependencies": {

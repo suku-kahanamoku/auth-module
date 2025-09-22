@@ -1,0 +1,88 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+  --color-primary-50: #e6f0f4;
+  --color-primary-100: #cce1e9;
+  --color-primary-200: #99c3d3;
+  --color-primary-300: #66a5bd;
+  --color-primary-400: #3387a6;
+  --color-primary-500: #034e67;
+  --color-primary-600: #033e59;
+  --color-primary-700: #022f4b;
+  --color-primary-800: #02233d;
+  --color-primary-900: #01182f;
+
+  --color-secondary-50: #f4e8df;
+  --color-secondary-100: #e9d2be;
+  --color-secondary-200: #dcb79b;
+  --color-secondary-300: #cf9d79;
+  --color-secondary-400: #c38256;
+  --color-secondary-500: #d0896b;
+  --color-secondary-600: #a15c3e;
+  --color-secondary-700: #7a3120;
+  --color-secondary-800: #511600;
+  --color-secondary-900: #290000;
+
+  --color-success-50: #e8f5e9;
+  --color-success-100: #c8e6c9;
+  --color-success-200: #a5d6a7;
+  --color-success-300: #81c784;
+  --color-success-400: #66bb6a;
+  --color-success-500: #4caf50;
+  --color-success-600: #43a047;
+  --color-success-700: #388e3c;
+  --color-success-800: #2e7d32;
+  --color-success-900: #1b5e20;
+  --color-success-950: #0d4d13;
+
+  --color-info-50: #e3f2fd;
+  --color-info-100: #bbdefb;
+  --color-info-200: #90caf9;
+  --color-info-300: #64b5f6;
+  --color-info-400: #42a5f5;
+  --color-info-500: #2196f3;
+  --color-info-600: #1e88e5;
+  --color-info-700: #1976d2;
+  --color-info-800: #1565c0;
+  --color-info-900: #0d47a1;
+  --color-info-950: #062f6b;
+
+  --color-warning-50: #fffde7;
+  --color-warning-100: #fff9c4;
+  --color-warning-200: #fff59d;
+  --color-warning-300: #fff176;
+  --color-warning-400: #ffee58;
+  --color-warning-500: #ffeb3b;
+  --color-warning-600: #fdd835;
+  --color-warning-700: #fbc02d;
+  --color-warning-800: #f9a825;
+  --color-warning-900: #f57f17;
+  --color-warning-950: #ab530d;
+
+  --color-error-50: #fdecea;
+  --color-error-100: #f9d3cf;
+  --color-error-200: #f2afa4;
+  --color-error-300: #eb8a78;
+  --color-error-400: #e56c55;
+  --color-error-500: #e03d2a;
+  --color-error-600: #cb3523;
+  --color-error-700: #b62e1d;
+  --color-error-800: #a02617;
+  --color-error-900: #8b1f12;
+  --color-error-950: #6e120b;
+}
+
+.appearance-none::-webkit-inner-spin-button,
+.appearance-none::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.appearance-none {
+  -moz-appearance: textfield;
+}
+
+button {
+  cursor: pointer;
+}
