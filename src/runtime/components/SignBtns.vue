@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { useMenuItems, useLocalePath, useAuthStore } from "#imports";
+import { useMenuItems, useLocalePath, useUserSession } from "#imports";
 
 const { routes } = useMenuItems();
 const localePath = useLocalePath();
-const authStore = useAuthStore();
+const userSessionStore = useUserSession();
 </script>
 
 <template>
-  <div v-if="!authStore?.loggedIn">
+  <div v-if="!userSessionStore?.loggedIn">
     <UButton
       v-if="routes?.login?.path"
       data-testid="menu-login"

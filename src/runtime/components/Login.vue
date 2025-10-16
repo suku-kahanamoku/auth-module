@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  useAuthStore,
   useToastify,
   ref,
   useUrlResolver,

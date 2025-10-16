@@ -1,32 +1,31 @@
 <script lang="ts" setup>
 import type { DropdownMenuItem } from "#ui/types";
-import { useAuthStore } from "#imports";
+import { useUserSession } from "#imports";
 
 const props = defineProps<{
   menuItems?: DropdownMenuItem[][];
 }>();
 
-const authStore = useAuthStore();
+const userSessionStore = useUserSession();
 </script>
 
 <template>
   <div class="flex">
     <UDropdown
-      v-if="authStore?.loggedIn"
+      v-if="userSessionStore?.loggedIn"
       :items="menuItems"
       :popper="{ placement: 'bottom-start' }"
     >
       <div data-testid="user-avatar" class="flex">
         <UAvatar
-          v-if="authStore?.user?.picture"
-          :src="authStore?.user?.picture"
+          v-if="userSessionStore?.user?.picture"
+          :src="userSessionStore?.user?.picture"
           aria-label="avatar"
           alt="avatar"
         />
         <UAvatar
           v-else
           icon="i-heroicons-user"
-          :chip-text="authStore?.initials"
           chip-position="top-right"
           chip-color="secondary"
           aria-label="avatar"

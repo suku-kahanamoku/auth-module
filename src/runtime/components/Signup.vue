@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import {
-  useAuthStore,
   useToastify,
   ref,
   useUrlResolver,
   useAsyncData,
   useLocalePath,
   useMenuItems,
+  navigateTo,
+  useUserSession,
+  useRuntimeConfig,
 } from "#imports";
 
 import { CLONE } from "@suku-kahanamoku/common-module/utils";
@@ -17,9 +19,11 @@ import sConfig from "../assets/configs/signup.json";
 const { updateConfig } = useUrlResolver();
 const localePath = useLocalePath();
 const { route, routes } = useMenuItems();
-const { signup } = useAuthStore();
 const { display } = useToastify();
+const userSessionStore = useUserSession();
 const loading = ref();
+const runtimeConfig = useRuntimeConfig().public?.authModule as any;
+const protectedPages = runtimeConfig.protectedPages || [];
 
 /**
  * Load config
@@ -37,10 +41,12 @@ const { data: config } = await useAsyncData(
   { watch: [() => route.query] }
 );
 
-async function onSubmit(event: Record<string, any>) {
+async function onSubmit(body: Record<string, any>) {
   loading.value = true;
   try {
-    await signup(event);
+    await $fetch("/api/auth/signup", { method: "POST", body });
+    await userSessionStore.fetch();
+    await navigateTo(localePath(protectedPages[0] || "/"));
   } catch (error: any) {
     display({ type: "error", message: error.data.message });
   }
@@ -70,7 +76,7 @@ async function onSubmit(event: Record<string, any>) {
                 <span> {{ $tt("$.signup.accept_condition") }} </span
                 >&nbsp;<ULink
                   data-testid="terms-conditions"
-                  :to="localePath(routes['terms-conditions']?.path)"
+                  :to="localePath(routes['terms-conditions']?.path!)"
                   class="text-primary-500"
                 >
                   {{
@@ -98,7 +104,7 @@ async function onSubmit(event: Record<string, any>) {
               {{ $tt("$.signup.has_account") }}
               <ULink
                 data-testid="login"
-                :to="localePath(routes?.login?.path)"
+                :to="localePath(routes?.login?.path!)"
                 class="font-medium text-primary-500"
                 >{{ $tt(routes?.login?.meta?.title as string) }}</ULink
               >

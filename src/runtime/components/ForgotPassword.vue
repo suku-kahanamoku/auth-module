@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  useAuthStore,
   useToastify,
   ref,
   useUrlResolver,
@@ -15,9 +14,7 @@ import type { IFormField } from "@suku-kahanamoku/form-module/types";
 import fConfig from "../assets/configs/forgot_password.json";
 
 const { updateConfig } = useUrlResolver();
-const { resetPassword } = useAuthStore();
-const localePath = useLocalePath();
-const { route, routes } = useMenuItems();
+const { route } = useMenuItems();
 const { display } = useToastify();
 const loading = ref();
 
@@ -37,12 +34,12 @@ const { data: config } = await useAsyncData(
   { watch: [() => route.query] }
 );
 
-async function onSubmit(event: Record<string, any>) {
+async function onSubmit(body: Record<string, any>) {
   loading.value = true;
   try {
-    await resetPassword(event);
+    await $fetch("/api/auth/reset-password", { method: "POST", body });
     // reset formulare
-    ITERATE(event, (v, k) => (event[k] = undefined));
+    ITERATE(body, (v, k) => (body[k] = undefined));
     display({ type: "success", message: "$.forgot_password.success_msg" });
   } catch (error: any) {
     display({ type: "error", message: error.data.message });
