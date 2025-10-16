@@ -31,11 +31,6 @@ const isOpen = ref(false);
     </CmpSlideMenu>
 
     <main>
-      <UButton
-      :to="localePath('/neco')"
-      >
-fdsa
-      </UButton>
       <slot></slot>
     </main>
 

@@ -22,7 +22,6 @@ import {
 
 // Module options TypeScript interface definition
 export interface ModuleOptions {
-  disablePages?: boolean;
   protectedPages?: string[];
 }
 
@@ -78,12 +77,10 @@ export default defineNuxtModule<ModuleOptions>({
     });
 
     // Pridani jednotlivych pages
-    if (!_options.disablePages) {
-      // Dynamicky nacitat vsechny pages z runtime/pages
-      GENERATE_PAGES("/", resolve);
-      GENERATE_PAGES("/pz", resolve);
-      GENERATE_PAGES("/admin", resolve);
-    }
+    // Dynamicky nacitat vsechny pages z runtime/pages
+    GENERATE_PAGES("/", resolve);
+    GENERATE_PAGES("/pz", resolve);
+    GENERATE_PAGES("/admin", resolve);
 
     // Pridani komponent
     addComponentsDir({

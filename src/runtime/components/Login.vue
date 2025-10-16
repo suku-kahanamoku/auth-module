@@ -7,6 +7,9 @@ import {
   useAsyncData,
   useLocalePath,
   useMenuItems,
+  useUserSession,
+  navigateTo,
+  useRuntimeConfig,
 } from "#imports";
 
 import { CLONE } from "@suku-kahanamoku/common-module/utils";
@@ -17,9 +20,11 @@ import lConfig from "../assets/configs/login.json";
 const { updateConfig } = useUrlResolver();
 const localePath = useLocalePath();
 const { route, routes } = useMenuItems();
-const { loginByGoogle, loginByLinkedin, login } = useAuthStore();
 const { display } = useToastify();
+const userSessionStore = useUserSession();
 const loading = ref();
+const runtimeConfig = useRuntimeConfig().public?.authModule as any;
+const protectedPages = runtimeConfig.protectedPages || [];
 
 /**
  * Load config
@@ -37,10 +42,12 @@ const { data: config } = await useAsyncData(
   { watch: [() => route.query] }
 );
 
-async function onSubmit(event: Record<string, any>) {
+async function onSubmit(body: Record<string, any>) {
   loading.value = true;
   try {
-    await login(event);
+    await $fetch("/api/login", { method: "POST", body });
+    await userSessionStore.fetch();
+    await navigateTo(localePath(protectedPages[0] || "/"));
   } catch (error: any) {
     display({ type: "error", message: error.data.message });
   }
@@ -60,11 +67,11 @@ async function onSubmit(event: Record<string, any>) {
 
       <div class="flex justify-between items-center w-full gap-4">
         <UButton
+          to="/api/login/google"
           data-testid="login-google"
           variant="outline"
           size="lg"
           class="flex-1"
-          @click="loginByGoogle()"
         >
           <div class="flex items-center justify-center gap-2 mx-auto">
             <Icon name="logos:google-icon" size="20" />
@@ -72,11 +79,11 @@ async function onSubmit(event: Record<string, any>) {
           </div>
         </UButton>
         <UButton
+          to="/api/login/linkedin"
           data-testid="login-linkedin"
           variant="outline"
           size="lg"
           class="flex-1"
-          @click="loginByLinkedin()"
         >
           <div class="flex items-center justify-center gap-2 mx-auto">
             <Icon name="logos:linkedin-icon" size="20" />
@@ -97,7 +104,7 @@ async function onSubmit(event: Record<string, any>) {
             <CmpField v-model="model[field.name]" :field="field" class="flex" />
             <ULink
               data-testid="forgot-password"
-              :to="localePath(routes['forgot-password']?.path)"
+              :to="localePath(routes['forgot-password']?.path!)"
               class="text-sm font-medium text-primary-500"
             >
               {{ $tt(routes["forgot-password"]?.meta?.title as string) }}
@@ -121,7 +128,7 @@ async function onSubmit(event: Record<string, any>) {
               {{ $tt("$.login.no_account") }}
               <ULink
                 data-testid="signup"
-                :to="localePath(routes?.signup?.path)"
+                :to="localePath(routes?.signup?.path!)"
                 class="font-medium text-primary-500"
               >
                 {{ $tt(routes?.signup?.meta?.title as string) }}
