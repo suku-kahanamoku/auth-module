@@ -49,33 +49,6 @@ export default defineNuxtModule<ModuleOptions>({
       password: "b8d172bdf0bc45d38329605e0420653c",
     });
 
-    // Config pro lang-module
-    nuxtOpt.langModule = defu(nuxtOpt.langModule || {}, {
-      locales: [
-        {
-          code: "en",
-          file: resolve("./runtime/assets/locales/en.json"),
-        },
-        {
-          code: "cs",
-          file: resolve("./runtime/assets/locales/cs.json"),
-        },
-      ],
-      langDir: resolve("./runtime/assets/locales"),
-    });
-
-    // Vynuti tailwind pro runtime komponenty
-    nuxtOpt.tailwindcss = defu(nuxtOpt.tailwindcss || {}, {
-      config: {
-        content: [
-          resolve("./runtime/components/**/*.{vue,mjs,js,ts}"),
-          resolve("./runtime/layouts/**/*.{vue,mjs,js,ts}"),
-          resolve("./runtime/pages/**/*.{vue,mjs,js,ts}"),
-          resolve("./runtime/*.{mjs,js,ts}"),
-        ],
-      },
-    });
-
     // Pridani jednotlivych pages
     // Dynamicky nacitat vsechny pages z runtime/pages
     GENERATE_PAGES("/", resolve);
@@ -168,5 +141,21 @@ export default defineNuxtModule<ModuleOptions>({
     if (!hasNuxtModule("@suku-kahanamoku/menu-module")) {
       await installModule("@suku-kahanamoku/menu-module");
     }
+
+    _nuxt.hook("i18n:registerModule", (register) => {
+      register({
+        langDir: resolve("./runtime/assets/locales"),
+        locales: [
+          {
+            code: "en",
+            file: "en.json",
+          },
+          {
+            code: "cs",
+            file: "cs.json",
+          },
+        ],
+      });
+    });
   },
 });
