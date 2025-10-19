@@ -4,7 +4,6 @@ import {
   installModule,
   createResolver,
   addImportsDir,
-  addServerHandler,
   addRouteMiddleware,
   addComponentsDir,
   addPlugin,
@@ -17,7 +16,6 @@ import * as fs from "node:fs";
 import {
   GENERATE_PAGES,
   GENERATE_API_ENDPOINT,
-  READ_FILE,
 } from "@suku-kahanamoku/common-module/server-utils";
 
 // Module options TypeScript interface definition
@@ -47,6 +45,22 @@ export default defineNuxtModule<ModuleOptions>({
       maxAge: 60 * 60 * 24,
       enableRefreshOnWindowFocus: true,
       password: "b8d172bdf0bc45d38329605e0420653c",
+    });
+
+    _nuxt.hook("i18n:registerModule", (register) => {
+      register({
+        langDir: resolve("./runtime/assets/locales"),
+        locales: [
+          {
+            code: "en",
+            file: "en.json",
+          },
+          {
+            code: "cs",
+            file: "cs.json",
+          },
+        ],
+      });
     });
 
     // Pridani jednotlivych pages
@@ -141,21 +155,5 @@ export default defineNuxtModule<ModuleOptions>({
     if (!hasNuxtModule("@suku-kahanamoku/menu-module")) {
       await installModule("@suku-kahanamoku/menu-module");
     }
-
-    _nuxt.hook("i18n:registerModule", (register) => {
-      register({
-        langDir: resolve("./runtime/assets/locales"),
-        locales: [
-          {
-            code: "en",
-            file: "en.json",
-          },
-          {
-            code: "cs",
-            file: "cs.json",
-          },
-        ],
-      });
-    });
   },
 });

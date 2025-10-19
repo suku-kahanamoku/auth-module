@@ -16,11 +16,7 @@ const isOpen = ref(false);
 
 <template>
   <div class="min-h-screen flex flex-col">
-    <CmpMainMenu v-model:is-open="isOpen" :config="{}" :menu-items="menuItems">
-      <template #logo>
-        <ULink :to="localePath('/')" class="h-full"> Logo </ULink>
-      </template>
-    </CmpMainMenu>
+    <CmpHeader />
 
     <CmpSlideMenu
       v-model:is-open="isOpen"
