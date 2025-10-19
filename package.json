@@ -1,6 +1,6 @@
 {
   "name": "@suku-kahanamoku/auth-module",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Auth module",
   "repository": {
     "type": "git",
