@@ -116,11 +116,6 @@ export default defineNuxtModule<ModuleOptions>({
       GENERATE_API_ENDPOINT(file, "/api/admin/user", resolve);
     });
 
-    // Install pinia module
-    if (!hasNuxtModule("@pinia/nuxt")) {
-      await installModule("@pinia/nuxt");
-    }
-
     // Install auth utils module
     if (!hasNuxtModule("nuxt-auth-utils")) {
       await installModule("nuxt-auth-utils");
