@@ -141,6 +141,11 @@ export default defineNuxtModule<ModuleOptions>({
       await installModule("@suku-kahanamoku/lang-module");
     }
 
+    // Install lang module
+    if (!hasNuxtModule("@suku-kahanamoku/mongoose-module")) {
+      await installModule("@suku-kahanamoku/mongoose-module");
+    }
+
     // Install ui module
     if (!hasNuxtModule("@suku-kahanamoku/ui-module")) {
       await installModule("@suku-kahanamoku/ui-module");

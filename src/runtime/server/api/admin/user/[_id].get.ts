@@ -1,4 +1,5 @@
-import { H3Event, defineEventHandler } from "h3";
+import { H3Event } from "h3";
+import { defineEventHandler, getQuery } from "#imports";
 
 import { RESOLVE_FACTORY } from "@suku-kahanamoku/common-module/server-utils";
 import {

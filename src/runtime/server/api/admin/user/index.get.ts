@@ -1,5 +1,5 @@
 import type { H3Event } from "h3";
-import { createError, defineEventHandler, getQuery } from "#imports";
+import { defineEventHandler, getQuery } from "#imports";
 
 import {
   GET_STATUS,
