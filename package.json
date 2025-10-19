@@ -1,8 +1,11 @@
 {
   "name": "@suku-kahanamoku/auth-module",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Auth module",
-  "repository": "@suku-kahanamoku/auth-module",
+  "repository": {
+    "type": "git",
+    "url": "@suku-kahanamoku/auth-module"
+  },
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -31,7 +34,7 @@
     "dist"
   ],
   "scripts": {
-    "prepack": "nuxt-module-build build --failOnWarn=false",
+    "prepack": "nuxt-module-build build",
     "dev": "npm run dev:prepare && nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
