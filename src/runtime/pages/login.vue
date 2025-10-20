@@ -27,9 +27,7 @@ useHead({
 </script>
 
 <template>
-  <div class="flex w-full">
-    <div class="flex items-center justify-center mx-auto w-full">
-      <CmpLogin />
-    </div>
+  <div class="flex items-center justify-center mt-10">
+    <CmpLogin />
   </div>
 </template>

@@ -54,64 +54,60 @@ async function onSubmit(body: Record<string, any>) {
 }
 </script>
 <template>
-  <div
-    class="w-full border border-gray-200 rounded-lg shadow-md dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700"
+  <CmpForm
+    :fields="(config?.fields as IFormField[])"
+    variant="subtle"
+    :ui="{ root: 'w-[400px]', header: 'space-y-4' }"
+    @submit="onSubmit"
   >
-    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+    <template #header>
       <h1
         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
       >
         {{ $tt("$.signup.title") }}
       </h1>
+    </template>
 
-      <CmpForm
-        :fields="(config?.fields as IFormField[])"
-        variant="soft"
-        @submit="onSubmit"
-      >
-        <template #terms="{ field, model }">
-          <div class="flex items-center justify-between">
-            <CmpField v-model="model[field.name]" :field="field">
-              <template #label>
-                <span> {{ $tt("$.signup.accept_condition") }} </span
-                >&nbsp;<ULink
-                  data-testid="terms-conditions"
-                  :to="localePath(routes['terms-conditions']?.path!)"
-                  class="text-primary-500"
-                >
-                  {{
-                    $tt(
-                      routes["terms-conditions"]?.meta?.title as string
-                    )?.toLocaleLowerCase()
-                  }}
-                </ULink>
-              </template>
-            </CmpField>
-          </div>
-        </template>
-        <template #actions>
-          <div class="flex flex-col gap-4">
-            <UButton
-              data-testid="signup-submit"
-              type="submit"
-              size="lg"
-              block
-              :loading="loading"
+    <template #terms="{ field, model }">
+      <div class="flex items-center justify-between">
+        <CmpField v-model="model[field.name]" :field="field">
+          <template #label>
+            <span> {{ $tt("$.signup.accept_condition") }} </span>&nbsp;<ULink
+              data-testid="terms-conditions"
+              :to="localePath(routes['terms-conditions']?.path!)"
+              class="text-primary-500"
             >
-              {{ $tt("$.signup.title") }}
-            </UButton>
-            <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-              {{ $tt("$.signup.has_account") }}
-              <ULink
-                data-testid="login"
-                :to="localePath(routes?.login?.path!)"
-                class="font-medium text-primary-500"
-                >{{ $tt(routes?.login?.meta?.title as string) }}</ULink
-              >
-            </p>
-          </div>
-        </template>
-      </CmpForm>
-    </div>
-  </div>
+              {{
+                $tt(
+                  routes["terms-conditions"]?.meta?.title as string
+                )?.toLocaleLowerCase()
+              }}
+            </ULink>
+          </template>
+        </CmpField>
+      </div>
+    </template>
+    <template #actions>
+      <div class="w-full flex flex-col gap-4">
+        <UButton
+          data-testid="signup-submit"
+          type="submit"
+          size="lg"
+          block
+          :loading="loading"
+        >
+          {{ $tt("$.signup.title") }}
+        </UButton>
+        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+          {{ $tt("$.signup.has_account") }}
+          <ULink
+            data-testid="login"
+            :to="localePath(routes?.login?.path!)"
+            class="font-medium text-primary-500"
+            >{{ $tt(routes?.login?.meta?.title as string) }}</ULink
+          >
+        </p>
+      </div>
+    </template>
+  </CmpForm>
 </template>

@@ -48,10 +48,13 @@ async function onSubmit(body: Record<string, any>) {
 }
 </script>
 <template>
-  <div
-    class="w-full border border-gray-200 rounded-lg shadow-md dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700"
+  <CmpForm
+    :fields="(config?.fields as IFormField[])"
+    variant="subtle"
+    :ui="{ root: 'w-[400px]', header: 'space-y-4' }"
+    @submit="onSubmit"
   >
-    <div class="p-6 space-y-4">
+    <template #header>
       <h1
         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
       >
@@ -60,21 +63,17 @@ async function onSubmit(body: Record<string, any>) {
       <p class="font-light text-gray-500 dark:text-gray-400">
         {{ $tt("$.forgot_password.description") }}
       </p>
-      <CmpForm
-        :fields="(config?.fields as IFormField[])"
-        variant="soft"
-        @submit="onSubmit"
+    </template>
+
+    <template #actions>
+      <UButton
+        data-testid="forgot-password-submit"
+        type="submit"
+        block
+        :loading="loading"
       >
-        <template #actions>
-          <UButton
-            data-testid="forgot-password-submit"
-            type="submit"
-            :loading="loading"
-          >
-            {{ $tt("$.btn.submit") }}
-          </UButton>
-        </template>
-      </CmpForm>
-    </div>
-  </div>
+        {{ $tt("$.btn.submit") }}
+      </UButton>
+    </template>
+  </CmpForm>
 </template>

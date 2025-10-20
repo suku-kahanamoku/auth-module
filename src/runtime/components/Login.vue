@@ -54,10 +54,13 @@ async function onSubmit(body: Record<string, any>) {
 }
 </script>
 <template>
-  <div
-    class="w-full border border-gray-200 rounded-lg shadow-md dark:border max-w-md dark:bg-gray-800 dark:border-gray-700"
+  <CmpForm
+    :fields="(config?.fields as IFormField[])"
+    variant="subtle"
+    :ui="{ root: 'w-[400px]', header: 'space-y-4' }"
+    @submit="onSubmit"
   >
-    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+    <template #header>
       <h1
         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
       >
@@ -90,52 +93,44 @@ async function onSubmit(body: Record<string, any>) {
           </div>
         </UButton>
       </div>
+    </template>
 
-      <USeparator :label="$tt('$.login.or')" />
+    <template #remember="{ field, model }">
+      <div class="flex items-center justify-between">
+        <CmpField v-model="model[field.name]" :field="field" class="flex" />
+        <ULink
+          data-testid="forgot-password"
+          :to="localePath(routes['forgot-password']?.path!)"
+          class="text-sm font-medium text-primary-500"
+        >
+          {{ $tt(routes["forgot-password"]?.meta?.title as string) }}
+        </ULink>
+      </div>
+    </template>
 
-      <CmpForm
-        :fields="(config?.fields as IFormField[])"
-        variant="soft"
-        @submit="onSubmit"
-      >
-        <template #remember="{ field, model }">
-          <div class="flex items-center justify-between">
-            <CmpField v-model="model[field.name]" :field="field" class="flex" />
-            <ULink
-              data-testid="forgot-password"
-              :to="localePath(routes['forgot-password']?.path!)"
-              class="text-sm font-medium text-primary-500"
-            >
-              {{ $tt(routes["forgot-password"]?.meta?.title as string) }}
-            </ULink>
-          </div>
-        </template>
+    <template #actions>
+      <div class="w-full flex flex-col gap-4">
+        <UButton
+          data-testid="login-submit"
+          type="submit"
+          size="lg"
+          block
+          :loading="loading"
+        >
+          {{ $tt("$.login.signin") }}
+        </UButton>
 
-        <template #actions>
-          <div class="flex flex-col gap-4">
-            <UButton
-              data-testid="login-submit"
-              type="submit"
-              size="lg"
-              block
-              :loading="loading"
-            >
-              {{ $tt("$.login.signin") }}
-            </UButton>
-
-            <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-              {{ $tt("$.login.no_account") }}
-              <ULink
-                data-testid="signup"
-                :to="localePath(routes?.signup?.path!)"
-                class="font-medium text-primary-500"
-              >
-                {{ $tt(routes?.signup?.meta?.title as string) }}
-              </ULink>
-            </p>
-          </div>
-        </template>
-      </CmpForm>
-    </div>
-  </div>
+        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+          {{ $tt("$.login.no_account") }}
+          <ULink
+            data-testid="signup"
+            :to="localePath(routes?.signup?.path!)"
+            class="font-medium text-primary-500"
+          >
+            {{ $tt(routes?.signup?.meta?.title as string) }}
+          </ULink>
+        </p>
+      </div>
+    </template>
+  </CmpForm>
 </template>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { CmpForgotPassword } from "#components";
 import {
   definePageMeta,
   useLang,
@@ -26,9 +27,7 @@ useHead({
 </script>
 
 <template>
-  <div class="flex w-full">
-    <div class="flex items-center justify-center mx-auto w-full">
-      <CmpForgotPassword />
-    </div>
+  <div class="flex items-center justify-center mt-10">
+    <CmpForgotPassword />
   </div>
 </template>
