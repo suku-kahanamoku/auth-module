@@ -116,5 +116,22 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Dependencies are now handled through peerDependencies in package.json
     // All required modules should be installed in the consuming project
+    
+    // Add server imports from nuxt-auth-utils
+    addServerImportsDir(resolve("./runtime/server/utils"));
+    
+    // Register nuxt-auth-utils imports
+    _nuxt.hook('imports:extend', (imports) => {
+      imports.push(
+        {
+          name: 'sessionHooks',
+          from: 'nuxt-auth-utils/server'
+        },
+        {
+          name: 'defineNitroPlugin', 
+          from: 'nitropack/runtime'
+        }
+      );
+    });
   },
 });
