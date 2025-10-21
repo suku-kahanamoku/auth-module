@@ -1,5 +1,7 @@
 import {
   defineNuxtModule,
+  hasNuxtModule,
+  installModule,
   createResolver,
   addImportsDir,
   addRouteMiddleware,
@@ -114,21 +116,44 @@ export default defineNuxtModule<ModuleOptions>({
       GENERATE_API_ENDPOINT(file, "/api/admin/user", resolve);
     });
 
-    // Dependencies are now handled through peerDependencies in package.json
-    // All required modules should be installed in the consuming project
-    
-    // Register nuxt-auth-utils imports for server-side code
-    _nuxt.hook('imports:extend', (imports) => {
-      imports.push(
-        {
-          name: 'sessionHooks',
-          from: 'nuxt-auth-utils/dist/runtime/server/utils/session'
-        },
-        {
-          name: 'defineNitroPlugin', 
-          from: 'nitropack/runtime'
-        }
-      );
-    });
+    // Install auth utils module
+    if (!hasNuxtModule("nuxt-auth-utils")) {
+      await installModule("nuxt-auth-utils");
+    }
+
+    // Install notify module
+    if (!hasNuxtModule("@suku-kahanamoku/notify-module")) {
+      await installModule("@suku-kahanamoku/notify-module");
+    }
+
+    // Install common module
+    if (!hasNuxtModule("@suku-kahanamoku/common-module")) {
+      await installModule("@suku-kahanamoku/common-module");
+    }
+
+    // Install lang module
+    if (!hasNuxtModule("@suku-kahanamoku/lang-module")) {
+      await installModule("@suku-kahanamoku/lang-module");
+    }
+
+    // Install lang module
+    if (!hasNuxtModule("@suku-kahanamoku/mongoose-module")) {
+      await installModule("@suku-kahanamoku/mongoose-module");
+    }
+
+    // Install ui module
+    if (!hasNuxtModule("@suku-kahanamoku/ui-module")) {
+      await installModule("@suku-kahanamoku/ui-module");
+    }
+
+    // Install form module
+    if (!hasNuxtModule("@suku-kahanamoku/form-module")) {
+      await installModule("@suku-kahanamoku/form-module");
+    }
+
+    // Install menu module
+    if (!hasNuxtModule("@suku-kahanamoku/menu-module")) {
+      await installModule("@suku-kahanamoku/menu-module");
+    }
   },
 });
