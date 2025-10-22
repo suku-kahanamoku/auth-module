@@ -75,7 +75,7 @@ async function onSubmit(body: Record<string, any>) {
             <span> {{ $tt("$.signup.accept_condition") }} </span>&nbsp;<ULink
               data-testid="terms-conditions"
               :to="localePath(routes['terms-conditions']?.path!)"
-              class="text-primary-500"
+              class="text-primary-500 hover:underline"
             >
               {{
                 $tt(

@@ -37,17 +37,6 @@
       "type": "checkbox",
       "required": true,
       "value": false
-    },
-    {
-      "label": "radio",
-      "name": "radio",
-      "type": "radio",
-      "required": true,
-      "options": [
-        { "label": "aa", "value": "aaa" },
-        { "label": "bb", "value": "bbb" }
-      ],
-      "value": false
     }
   ]
 }

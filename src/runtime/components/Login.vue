@@ -69,11 +69,11 @@ async function onSubmit(body: Record<string, any>) {
 
       <div class="flex justify-between items-center w-full gap-4">
         <UButton
-          to="/api/login/google"
           data-testid="login-google"
           variant="outline"
           size="lg"
-          class="flex-1"
+          block
+          @click="navigateTo('/api/login/google', { external: true })"
         >
           <div class="flex items-center justify-center gap-2 mx-auto">
             <Icon name="logos:google-icon" size="20" />
@@ -81,11 +81,11 @@ async function onSubmit(body: Record<string, any>) {
           </div>
         </UButton>
         <UButton
-          to="/api/login/linkedin"
           data-testid="login-linkedin"
           variant="outline"
           size="lg"
-          class="flex-1"
+          block
+          @click="navigateTo('/api/login/linkedin', { external: true })"
         >
           <div class="flex items-center justify-center gap-2 mx-auto">
             <Icon name="logos:linkedin-icon" size="20" />

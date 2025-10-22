@@ -4,9 +4,7 @@ import {
   setUserSession,
   sendRedirect,
   useRuntimeConfig,
-  createError,
 } from "#imports";
-import { tryCookieLocale } from "@intlify/utils/h3";
 
 import {
   GET_STATUS,
@@ -42,20 +40,10 @@ export default defineOAuthFacebookEventHandler({
       user,
       tokens,
     });
-    const locale =
-      tryCookieLocale(event, {
-        lang: "",
-        name: i18n?.detectBrowserLanguage?.cookieKey,
-      })?.toString() || i18n?.defaultLocale;
     return await sendRedirect(event, "/pz");
   },
   async onError(event: H3Event) {
     const i18n = useRuntimeConfig(event).public?.i18n;
-    const locale =
-      tryCookieLocale(event, {
-        lang: "",
-        name: i18n?.detectBrowserLanguage?.cookieKey,
-      })?.toString() || i18n?.defaultLocale;
     return await sendRedirect(event, "/login");
   },
 });
