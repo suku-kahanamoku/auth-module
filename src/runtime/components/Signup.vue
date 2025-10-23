@@ -20,7 +20,7 @@ const { updateConfig } = useUrlResolver();
 const localePath = useLocalePath();
 const { route, routes } = useMenuItems();
 const { display } = useToastify();
-const userSessionStore = useUserSession();
+const { fetch } = useUserSession();
 const loading = ref();
 const runtimeConfig = useRuntimeConfig().public?.authModule as any;
 const protectedPages = runtimeConfig.protectedPages || [];
@@ -45,7 +45,7 @@ async function onSubmit(body: Record<string, any>) {
   loading.value = true;
   try {
     await $fetch("/api/auth/signup", { method: "POST", body });
-    await userSessionStore.fetch();
+    await fetch();
     await navigateTo(localePath(protectedPages[0] || "/"));
   } catch (error: any) {
     display({ type: "error", message: error.data.message });
