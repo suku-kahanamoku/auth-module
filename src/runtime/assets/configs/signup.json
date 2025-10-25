@@ -1,5 +1,6 @@
 {
   "syscode": "signup",
+  "restUrl": "/api/auth/signup",
   "fields": [
     {
       "name": "email",

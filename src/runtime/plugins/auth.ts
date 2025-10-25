@@ -34,7 +34,7 @@ export default defineNuxtPlugin((nuxtApp) => {
             router.currentRoute.value.path.startsWith(`/${locale.value + page}`)
         )
       ) {
-        await navigateTo(localePath(routes?.login?.path), {
+        await navigateTo(localePath(routes.login?.path!), {
           redirectCode: 302,
         });
       }

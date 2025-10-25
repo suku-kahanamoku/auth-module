@@ -7,11 +7,17 @@ import {
   useLocalePath,
   useMenuItems,
 } from "#imports";
+import defu from "defu";
 
 import { CLONE, ITERATE } from "@suku-kahanamoku/common-module/utils";
 import type { IFormField } from "@suku-kahanamoku/form-module/types";
 
 import fConfig from "../assets/configs/forgot_password.json";
+
+// Definice props
+const props = defineProps<{
+  ui?: Record<string, any>;
+}>();
 
 const { updateConfig } = useUrlResolver();
 const { route } = useMenuItems();
@@ -35,23 +41,27 @@ const { data: config } = await useAsyncData(
 );
 
 async function onSubmit(body: Record<string, any>) {
-  loading.value = true;
-  try {
-    await $fetch("/api/auth/reset-password", { method: "POST", body });
-    // reset formulare
-    ITERATE(body, (v, k) => (body[k] = undefined));
-    display({ type: "success", message: "$.forgot_password.success_msg" });
-  } catch (error: any) {
-    display({ type: "error", message: error.data.message });
+  if (config.value?.restUrl) {
+    loading.value = true;
+
+    try {
+      await $fetch(config.value.restUrl, { method: "POST", body });
+      // reset formulare
+      ITERATE(body, (v, k) => (body[k] = undefined));
+      display({ type: "success", message: "$.forgot_password.success_msg" });
+    } catch (error: any) {
+      display({ type: "error", message: error.data.message });
+    }
+
+    loading.value = false;
   }
-  loading.value = false;
 }
 </script>
 <template>
   <CmpForm
     :fields="(config?.fields as IFormField[])"
     variant="subtle"
-    :ui="{ root: 'w-[400px]', header: 'space-y-4' }"
+    :ui="defu(ui, { header: 'space-y-4' })"
     @submit="onSubmit"
   >
     <template #header>

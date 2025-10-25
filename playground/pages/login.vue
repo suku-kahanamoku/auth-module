@@ -8,8 +8,9 @@ import {
 } from "#imports";
 
 definePageMeta({
-  syscode: "profile",
-  title: "$.profile.title",
+  syscode: "login",
+  title: "$.login.title",
+  label: "$.login.label",
 });
 
 const { t } = useLang();
@@ -19,16 +20,14 @@ const title = computed(() => t(route.meta.title as string));
 useHead({
   title,
   meta: [
-    { name: "description", content: t("$.profile.description") },
-    { name: "keywords", content: t("$.profile.keywords") },
+    { name: "description", content: t("$.login.description") },
+    { name: "keywords", content: t("$.login.keywords") },
   ],
 });
 </script>
 
 <template>
-  <div class="w-full mx-auto px-5 py-5 flex flex-col gap-10">
-    <div class="w-full h-full flex justify-center items-center">
-      {{ title }}
-    </div>
+  <div class="flex items-center justify-center mt-10">
+    <CmpLogin :ui="{ root: 'w-[600px]' }" />
   </div>
 </template>

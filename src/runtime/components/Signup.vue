@@ -10,11 +10,17 @@ import {
   useUserSession,
   useRuntimeConfig,
 } from "#imports";
+import defu from "defu";
 
 import { CLONE } from "@suku-kahanamoku/common-module/utils";
 import type { IFormField } from "@suku-kahanamoku/form-module/types";
 
 import sConfig from "../assets/configs/signup.json";
+
+// Definice props
+const props = defineProps<{
+  ui?: Record<string, any>;
+}>();
 
 const { updateConfig } = useUrlResolver();
 const localePath = useLocalePath();
@@ -42,22 +48,24 @@ const { data: config } = await useAsyncData(
 );
 
 async function onSubmit(body: Record<string, any>) {
-  loading.value = true;
-  try {
-    await $fetch("/api/auth/signup", { method: "POST", body });
-    await fetch();
-    await navigateTo(localePath(protectedPages[0] || "/"));
-  } catch (error: any) {
-    display({ type: "error", message: error.data.message });
+  if (config.value?.restUrl) {
+    loading.value = true;
+    try {
+      await $fetch(config.value.restUrl, { method: "POST", body });
+      await fetch();
+      await navigateTo(localePath(protectedPages[0] || "/"));
+    } catch (error: any) {
+      display({ type: "error", message: error.data.message });
+    }
+    loading.value = false;
   }
-  loading.value = false;
 }
 </script>
 <template>
   <CmpForm
     :fields="(config?.fields as IFormField[])"
     variant="subtle"
-    :ui="{ root: 'w-[400px]', header: 'space-y-4' }"
+    :ui="defu(ui, { header: 'space-y-4' })"
     @submit="onSubmit"
   >
     <template #header>
@@ -102,9 +110,9 @@ async function onSubmit(body: Record<string, any>) {
           {{ $tt("$.signup.has_account") }}
           <ULink
             data-testid="login"
-            :to="localePath(routes?.login?.path!)"
+            :to="localePath(routes.login?.path!)"
             class="font-medium text-primary-500"
-            >{{ $tt(routes?.login?.meta?.title as string) }}</ULink
+            >{{ $tt(routes.login?.meta?.title as string) }}</ULink
           >
         </p>
       </div>

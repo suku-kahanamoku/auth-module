@@ -8,6 +8,4 @@ const localePath = useLocalePath();
   <UMain>
     <slot></slot>
   </UMain>
-
-  <CmpFooter url="https://www.prasentace.cz/" name="PRASENTACE" />
 </template>

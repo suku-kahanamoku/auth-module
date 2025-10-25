@@ -13,10 +13,7 @@ import {
 import defu from "defu";
 import * as fs from "node:fs";
 
-import {
-  GENERATE_PAGES,
-  GENERATE_API_ENDPOINT,
-} from "@suku-kahanamoku/common-module/server-utils";
+import { GENERATE_API_ENDPOINT } from "@suku-kahanamoku/common-module/server-utils";
 
 // Module options TypeScript interface definition
 export interface ModuleOptions {
@@ -62,12 +59,6 @@ export default defineNuxtModule<ModuleOptions>({
         ],
       });
     });
-
-    // Pridani jednotlivych pages
-    // Dynamicky nacitat vsechny pages z runtime/pages
-    GENERATE_PAGES("/", resolve);
-    GENERATE_PAGES("/pz", resolve);
-    GENERATE_PAGES("/admin", resolve);
 
     // Pridani komponent
     addComponentsDir({

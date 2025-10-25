@@ -1,5 +1,10 @@
 import type { H3Event } from "h3";
-import { defineEventHandler, readBody, useMailing } from "#imports";
+import {
+  defineEventHandler,
+  readBody,
+  useMailing,
+  useTranslation,
+} from "#imports";
 
 import {
   GET_STATUS,

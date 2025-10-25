@@ -31,7 +31,7 @@ export default async function (
         to.path.startsWith(`/${locale.value + page}`)
     )
   ) {
-    return await navigateTo(localePath(routes?.login?.path), {
+    return await navigateTo(localePath(routes.login?.path!), {
       redirectCode: 302,
     });
   }

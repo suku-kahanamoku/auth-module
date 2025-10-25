@@ -1,5 +1,6 @@
 {
   "syscode": "login",
+  "restUrl": "/api/login",
   "fields": [
     {
       "name": "email",
