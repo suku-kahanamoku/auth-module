@@ -26,7 +26,7 @@ export default defineNitroPlugin(() => {
           }
 
           const user = await UserModel.findOne({
-            _id: event.context.params?.id,
+            email: session.user.email,
           });
           const result = {
             ...user?.toObject(),
