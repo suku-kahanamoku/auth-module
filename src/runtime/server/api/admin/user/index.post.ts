@@ -36,7 +36,7 @@ export default defineEventHandler(
     }
 
     const user = await UserModel.create(body);
-    const result = { ...user?.toObject(), password: undefined };
+    const result = { ...user?.toObject(), password: undefined, tempPassword: undefined };
     RESOLVE_FACTORY(result, query.factory);
 
     return {

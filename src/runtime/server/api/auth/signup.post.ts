@@ -71,7 +71,7 @@ export default defineEventHandler(
       });
     }
 
-    const result = { ...user.toObject(), password: undefined };
+    const result = { ...user.toObject(), password: undefined, tempPassword: undefined };
 
     // nastavi session
     await setUserSession(event, {

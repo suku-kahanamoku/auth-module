@@ -1,5 +1,12 @@
-import { defineNitroPlugin, sessionHooks, createError } from "#imports";
+import {
+  defineNitroPlugin,
+  sessionHooks,
+  createError,
+  setUserSession,
+} from "#imports";
 import { jwtDecode } from "jwt-decode";
+
+import { UserModel } from "../../models/user.schema";
 
 export default defineNitroPlugin(() => {
   sessionHooks.hook("fetch", async (session, event) => {
@@ -17,6 +24,21 @@ export default defineNitroPlugin(() => {
               message: "Session expired",
             });
           }
+
+          const user = await UserModel.findOne({
+            _id: event.context.params?.id,
+          });
+          const result = {
+            ...user?.toObject(),
+            password: undefined,
+            tempPassword: undefined,
+          };
+
+          // nastavi user session
+          await setUserSession(event, {
+            result,
+            tokens: session.tokens,
+          });
         }
       } catch (e) {
         // Pokud dojde k chybě při dekódování tokenu, vyhodi chybu

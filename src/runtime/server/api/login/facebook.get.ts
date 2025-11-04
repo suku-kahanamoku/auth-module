@@ -33,7 +33,7 @@ export default defineOAuthFacebookEventHandler({
       if (!dbUser?._id) {
         dbUser = await UserModel.create(user);
       }
-      user = { ...user, ...dbUser.toObject() };
+      user = { ...user, ...dbUser.toObject(), password: undefined, tempPassword: undefined };
     }
     // nastavi user session
     await setUserSession(event, {

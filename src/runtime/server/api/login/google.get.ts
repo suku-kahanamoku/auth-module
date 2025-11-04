@@ -38,7 +38,7 @@ export default defineOAuthGoogleEventHandler({
           familyName: user.family_name,
         });
       }
-      user = { ...user, ...dbUser.toObject() };
+      user = { ...user, ...dbUser.toObject(), password: undefined, tempPassword: undefined };
     }
     // nastavi user session
     await setUserSession(event, {

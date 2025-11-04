@@ -29,7 +29,7 @@ export default defineEventHandler(
     const total = await UserModel.countDocuments(where);
 
     const users = result?.map((i) => {
-      const user = { ...i.toObject(), password: undefined };
+      const user = { ...i.toObject(), password: undefined, tempPassword: undefined };
       RESOLVE_FACTORY(user, query.factory);
       return user;
     });
