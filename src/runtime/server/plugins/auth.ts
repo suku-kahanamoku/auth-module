@@ -2,7 +2,7 @@ import {
   defineNitroPlugin,
   sessionHooks,
   createError,
-  setUserSession,
+  replaceUserSession,
 } from "#imports";
 import { jwtDecode } from "jwt-decode";
 
@@ -35,8 +35,8 @@ export default defineNitroPlugin(() => {
           };
 
           // nastavi user session
-          await setUserSession(event, {
-            result,
+          await replaceUserSession(event, {
+            user: result,
             tokens: session.tokens,
           });
         }
