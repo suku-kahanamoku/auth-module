@@ -1,8 +1,9 @@
 <template>
-  <div>{{ $tt("$.btn.submit") }}</div>
-  <UCard :ui="{root: 'bg-primary w-[400px]'}">
-    <div>fdsa</div>
-  </UCard>
+  fdsa
+    <div>{{ user }}</div>
+  <UButton @click="fetch">fdsa</UButton>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+const { user, fetch } = useUserSession();
+</script>
