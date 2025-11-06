@@ -3,9 +3,7 @@ import {
   defineEventHandler,
   readBody,
   setUserSession,
-  useMailing,
   createError,
-  useTranslation,
   hashPassword,
 } from "#imports";
 
@@ -14,7 +12,6 @@ import {
   CONNECT_WITH_RETRY,
 } from "@suku-kahanamoku/mongoose-module/server-utils";
 
-import SignupForm from "../../../emails/Signup.vue";
 import { UserModel } from "../../../models/user.schema";
 import { IUserResponse } from "../../../types";
 
@@ -51,23 +48,9 @@ export default defineEventHandler(
         password: await hashPassword(body.password),
       });
 
-      const t = await useTranslation(event);
-      const { template, send } = await useMailing(event);
-      await send({
-        subject: t("$.mailing.signup.subject"),
-        template: await template(SignupForm, {
-          url: process.env.FRONTEND_HOST,
-        }),
-        to: [
-          {
-            Email: body.email,
-          },
-        ],
-        bcc: [
-          {
-            Email: process.env.NUXT_MAILING_FROM!,
-          },
-        ],
+      await $fetch("/api/email/signup", {
+        method: "POST",
+        body,
       });
     }
 
