@@ -49,33 +49,6 @@
       "user_not_exists": "Uživatel neexistuje",
       "password_min": "Musí obsahovat alespoň {count} znaků",
       "password_not_match": "Hesla se neshodují"
-    },
-    "mailing": {
-      "addressed": "Vážený zákazníku",
-      "regards": "S pozdravem",
-      "team": "Skeleton tým",
-      "reserved": "Všechna práva vyhrazena",
-      "signup": {
-        "subject": "Potvrzení registrace",
-        "thank_you": "Děkujeme Vám za registraci na naší platformě.",
-        "success_done": "Vaše registrace byla úspěšně dokončena a Váš účet byl aktivován.",
-        "further_questions": "Pokud máte jakékoli dotazy ohledně používání našich služeb nebo potřebujete pomoc, neváhejte nás kontaktovat. Jsme tu pro Vás."
-      },
-      "forgot_password": {
-        "subject": "Reset hesla",
-        "request_password": "Obdrželi jsme žádost o resetování hesla k vašemu účtu.",
-        "new_password": "Bylo vygenerováno nové heslo pro váš účet.",
-        "contact_us": "Pokud jste o nové heslo nežádal/a, kontaktujte nás okamžitě.",
-        "further_questions": "Pokud máte nějaké další otázky nebo potřebujete pomoc, neváhejte nás kontaktovat."
-      },
-      "form": {
-        "submit": "Odeslat",
-        "email": "E-mail",
-        "password": "Heslo",
-        "given_name": "Křestní jméno",
-        "family_name": "Příjmení",
-        "realm": "Realm"
-      }
     }
   }
 }
