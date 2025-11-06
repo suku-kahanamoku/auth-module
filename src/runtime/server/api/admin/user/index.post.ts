@@ -1,5 +1,11 @@
 import type { H3Event } from "h3";
-import { defineEventHandler, getQuery, readBody, createError } from "#imports";
+import {
+  defineEventHandler,
+  getQuery,
+  readBody,
+  createError,
+  hashPassword,
+} from "#imports";
 
 import { RESOLVE_FACTORY } from "@suku-kahanamoku/common-module/server-utils";
 import {
@@ -7,7 +13,6 @@ import {
   CONNECT_WITH_RETRY,
 } from "@suku-kahanamoku/mongoose-module/server-utils";
 
-import { GENERATE_HASHED_PASSWORD } from "../../../../utils/password.functions";
 import { UserModel } from "../../../../models/user.schema";
 import { IUserResponse } from "../../../../types";
 
@@ -32,11 +37,15 @@ export default defineEventHandler(
     }
 
     if (body.password) {
-      body.password = await GENERATE_HASHED_PASSWORD(body.password?.toString());
+      body.password = await hashPassword(body.password?.toString());
     }
 
     const user = await UserModel.create(body);
-    const result = { ...user?.toObject(), password: undefined, tempPassword: undefined };
+    const result = {
+      ...user?.toObject(),
+      password: undefined,
+      tempPassword: undefined,
+    };
     RESOLVE_FACTORY(result, query.factory);
 
     return {

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 defineProps({
+  tt: Function,
   url: {
     type: String,
   },
@@ -23,20 +24,20 @@ const main = {
             <span class="text-primary-600 dark:text-primary-400">Skeleton</span>
             <span class="text-secondary-500 dark:text-secondary-300">Logo</span>
           </ELink>
-          <EText class="text-md"> {{ $tt("$.mailing.addressed") }}, </EText>
+          <EText class="text-md"> {{ tt("$.mailing.addressed") }}, </EText>
           <EText class="text-md" py="12">
-            {{ $tt("$.mailing.signup.thank_you") }}
+            {{ tt("$.mailing.signup.thank_you") }}
           </EText>
           <EText class="text-md">
-            {{ $tt("$.mailing.signup.success_done") }}
+            {{ tt("$.mailing.signup.success_done") }}
           </EText>
           <EText class="text-md" py="12">
-            {{ $tt("$.mailing.signup.further_questions") }}
+            {{ tt("$.mailing.signup.further_questions") }}
           </EText>
           <EText class="text-md">
-            {{ $tt("$.mailing.regards") }},
+            {{ tt("$.mailing.regards") }},
             <br />
-            {{ $tt("$.mailing.team") }}
+            {{ tt("$.mailing.team") }}
           </EText>
           <EHr class="text-gray-600" my="20" />
           <EText class="text-xs text-gray-600">
@@ -48,7 +49,7 @@ const main = {
               <span class="text-secondary-500 dark:text-secondary-300"
                 >Logo</span
               ></ELink
-            >. {{ $tt("$.mailing.reserved") }}.
+            >. {{ tt("$.mailing.reserved") }}.
           </EText>
         </EContainer>
       </EBody>

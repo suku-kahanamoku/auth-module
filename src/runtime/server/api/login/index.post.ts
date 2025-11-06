@@ -4,6 +4,7 @@ import {
   readBody,
   createError,
   setUserSession,
+  verifyPassword,
 } from "#imports";
 
 import {
@@ -11,7 +12,6 @@ import {
   CONNECT_WITH_RETRY,
 } from "@suku-kahanamoku/mongoose-module/server-utils";
 
-import { COMPARE_PASSWORD } from "../../../utils/password.functions";
 import { UserModel } from "../../../models/user.schema";
 import { IUserResponse } from "../../../types";
 
@@ -36,10 +36,15 @@ export default defineEventHandler(
 
     // kontrola uzivatele a hesla
     if (user?._id) {
-      const isValid =
-        (await COMPARE_PASSWORD(body.password, user.password || "")) ||
-        (await COMPARE_PASSWORD(body.password, user.tempPassword || ""));
-      if (!isValid) {
+      const isPassValid = await verifyPassword(
+        user.password || "",
+        body.password
+      );
+      const isTempPassValid = await verifyPassword(
+        user.tempPassword || "",
+        body.password
+      );
+      if (!isPassValid && !isTempPassValid) {
         throw createError({
           statusCode: 401,
           message: "Incorrect login credentials.",
@@ -54,7 +59,11 @@ export default defineEventHandler(
       });
     }
 
-    const result = { ...user?.toObject(), password: undefined, tempPassword: undefined };
+    const result = {
+      ...user?.toObject(),
+      password: undefined,
+      tempPassword: undefined,
+    };
     // nastavi user session
     await setUserSession(event, {
       user,

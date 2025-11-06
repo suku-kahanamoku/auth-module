@@ -5,6 +5,8 @@ import {
   useTranslation,
   readBody,
   createError,
+  hashPassword,
+  verifyPassword,
 } from "#imports";
 
 import { RESOLVE_FACTORY } from "@suku-kahanamoku/common-module/server-utils";
@@ -13,10 +15,6 @@ import {
   CONNECT_WITH_RETRY,
 } from "@suku-kahanamoku/mongoose-module/server-utils";
 
-import {
-  COMPARE_PASSWORD,
-  GENERATE_HASHED_PASSWORD,
-} from "../../../../utils/password.functions";
 import { UserModel } from "../../../../models/user.schema";
 import { IUserResponse } from "../../../../types";
 
@@ -37,11 +35,16 @@ export default defineEventHandler(
     if (dbUser?._id) {
       if (body.password) {
         // kontrola hesla
-        const isValid =
-          (await COMPARE_PASSWORD(body.password, dbUser.password || "")) ||
-          (await COMPARE_PASSWORD(body.password, dbUser.tempPassword || ""));
+        const isPassValid = await verifyPassword(
+          dbUser.password || "",
+          body.password
+        );
+        const isTempPassValid = await verifyPassword(
+          dbUser.tempPassword || "",
+          body.password
+        );
         delete body.password;
-        if (!isValid) {
+        if (!isPassValid && !isTempPassValid) {
           throw createError({
             statusCode: 400,
             statusMessage: t("$.message.incorrect_login"),
@@ -50,7 +53,7 @@ export default defineEventHandler(
         }
         // zmena hesla
         if (body.newPassword) {
-          body.password = await GENERATE_HASHED_PASSWORD(body.newPassword);
+          body.password = await hashPassword(body.newPassword);
         }
       }
     }
@@ -70,7 +73,11 @@ export default defineEventHandler(
         new: true,
       }
     );
-    const result = { ...user?.toObject(), password: undefined, tempPassword: undefined };
+    const result = {
+      ...user?.toObject(),
+      password: undefined,
+      tempPassword: undefined,
+    };
     RESOLVE_FACTORY(result, query.factory);
 
     return {

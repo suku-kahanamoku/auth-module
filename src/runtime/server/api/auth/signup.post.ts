@@ -6,6 +6,7 @@ import {
   useMailing,
   createError,
   useTranslation,
+  hashPassword,
 } from "#imports";
 
 import {
@@ -15,7 +16,6 @@ import {
 
 import SignupForm from "../../../emails/Signup.vue";
 import { UserModel } from "../../../models/user.schema";
-import { GENERATE_HASHED_PASSWORD } from "../../../utils/password.functions";
 import { IUserResponse } from "../../../types";
 
 export default defineEventHandler(
@@ -48,7 +48,7 @@ export default defineEventHandler(
     else {
       user = await UserModel.create({
         ...body,
-        password: await GENERATE_HASHED_PASSWORD(body.password),
+        password: await hashPassword(body.password),
       });
 
       const t = await useTranslation(event);
@@ -71,7 +71,11 @@ export default defineEventHandler(
       });
     }
 
-    const result = { ...user.toObject(), password: undefined, tempPassword: undefined };
+    const result = {
+      ...user.toObject(),
+      password: undefined,
+      tempPassword: undefined,
+    };
 
     // nastavi session
     await setUserSession(event, {

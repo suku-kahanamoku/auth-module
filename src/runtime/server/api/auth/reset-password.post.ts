@@ -1,6 +1,7 @@
 import type { H3Event } from "h3";
 import {
   defineEventHandler,
+  hashPassword,
   readBody,
   useMailing,
   useTranslation,
@@ -13,10 +14,7 @@ import {
 
 import ResetPasswordForm from "../../../emails/ResetPassword.vue";
 
-import {
-  GENERATE_PASSWORD,
-  GENERATE_HASHED_PASSWORD,
-} from "../../../utils/password.functions";
+import { GENERATE_PASSWORD } from "../../../utils/password.functions";
 import { UserModel } from "../../../models/user.schema";
 
 export default defineEventHandler(async (event: H3Event) => {
@@ -33,7 +31,7 @@ export default defineEventHandler(async (event: H3Event) => {
   if (user?._id) {
     await UserModel.updateOne(
       { _id: user._id },
-      { tempPassword: await GENERATE_HASHED_PASSWORD(newPassword) }
+      { tempPassword: await hashPassword(newPassword) }
     );
 
     const t = await useTranslation(event);
@@ -42,6 +40,7 @@ export default defineEventHandler(async (event: H3Event) => {
     await send({
       subject: t("$.mailing.forgot_password.subject"),
       template: await template(ResetPasswordForm, {
+        tt: t,
         url: process.env.FRONTEND_HOST,
         email: body.email,
         password: newPassword,

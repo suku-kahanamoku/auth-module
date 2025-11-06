@@ -1,5 +1,6 @@
 <script setup lang="ts">
 defineProps({
+  tt: Function,
   url: {
     type: String,
   },
@@ -29,31 +30,31 @@ const main = {
             <span class="text-primary-600 dark:text-primary-400">Skeleton</span>
             <span class="text-secondary-500 dark:text-secondary-300">Logo</span>
           </ELink>
-          <EText class="text-md"> {{ $tt("$.mailing.addressed") }}, </EText>
+          <EText class="text-md"> {{ tt("$.mailing.addressed") }}, </EText>
           <EText class="text-md" py="12">
-            {{ $tt("$.mailing.forgot_password.request_password") }}
+            {{ tt("$.mailing.forgot_password.request_password") }}
           </EText>
           <EText class="text-md">
-            {{ $tt("$.mailing.forgot_password.new_password") }}
+            {{ tt("$.mailing.forgot_password.new_password") }}
           </EText>
 
           <EText class="text-sm text-slate-600">
-            {{ $tt("$.form.email") }}: {{ email }}
+            {{ tt("$.form.email") }}: {{ email }}
           </EText>
           <EText class="text-sm text-slate-600">
-            {{ $tt("$.form.password") }}: {{ password }}
+            {{ tt("$.form.password") }}: {{ password }}
           </EText>
 
           <EText class="text-md">
-            {{ $tt("$.mailing.forgot_password.contact_us") }}
+            {{ tt("$.mailing.forgot_password.contact_us") }}
           </EText>
           <EText class="text-md" py="12">
-            {{ $tt("$.mailing.forgot_password.further_questions") }}
+            {{ tt("$.mailing.forgot_password.further_questions") }}
           </EText>
           <EText class="text-md">
-            {{ $tt("$.mailing.regards") }},
+            {{ tt("$.mailing.regards") }},
             <br />
-            {{ $tt("$.mailing.team") }}
+            {{ tt("$.mailing.team") }}
           </EText>
           <EHr class="text-gray-600" my="20" />
           <EText class="text-xs text-gray-600">
@@ -65,7 +66,7 @@ const main = {
               <span class="text-secondary-500 dark:text-secondary-300"
                 >Logo</span
               ></ELink
-            >. {{ $tt("$.mailing.reserved") }}.
+            >. {{ tt("$.mailing.reserved") }}.
           </EText>
         </EContainer>
       </EBody>
