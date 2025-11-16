@@ -1,5 +1,15 @@
 import type { IResponse } from "@suku-kahanamoku/common-module/types";
+
 import type { IAddress } from "./address.interface";
+
+export interface IBankAccount {
+  iban?: string;
+  accountNumber?: string;
+  bankCode?: string;
+  bankName?: string;
+  swift?: string;
+  isDefault?: boolean;
+}
 
 export interface IUser {
   _id?: string;
@@ -16,6 +26,7 @@ export interface IUser {
     main?: IAddress;
     variants?: IAddress[];
   };
+  banks?: IBankAccount[];
   phone?: string;
   createdAt?: Date;
   updatedAt?: Date;

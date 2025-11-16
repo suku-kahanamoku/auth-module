@@ -2,7 +2,39 @@ import { Schema, model } from "mongoose";
 
 import { AddressModel } from "./address.schema";
 import type { IAddress } from "../types/address.interface";
-import type { IUser } from "../types/user.interface";
+import type { IUser, IBankAccount } from "../types/user.interface";
+
+export const BankAccountSchema = new Schema<IBankAccount>(
+  {
+    iban: {
+      type: String,
+      trim: true,
+    },
+    accountNumber: {
+      type: String,
+      trim: true,
+    },
+    bankCode: {
+      type: String,
+      trim: true,
+    },
+    bankName: {
+      type: String,
+      trim: true,
+    },
+    swift: {
+      type: String,
+      trim: true,
+    },
+    isDefault: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 export const UserSchema = new Schema<IUser>(
   {
@@ -58,6 +90,7 @@ export const UserSchema = new Schema<IUser>(
         },
       ],
     },
+    banks: [BankAccountSchema],
     phone: {
       type: String,
       trim: true,
