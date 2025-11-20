@@ -1,4 +1,4 @@
-import type { IResponse } from "@suku-kahanamoku/common-module/types";
+import type { IItem, IResponse } from "@suku-kahanamoku/common-module/types";
 
 import type { IAddress } from "./address.interface";
 
@@ -11,8 +11,7 @@ export interface IBankAccount {
   isDefault?: boolean;
 }
 
-export interface IUser {
-  _id?: string;
+export interface IUser extends IItem {
   email?: string;
   name?: string;
   surname?: string;

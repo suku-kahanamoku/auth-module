@@ -1,6 +1,6 @@
-import type { IResponse } from "@suku-kahanamoku/common-module/types";
+import type { IItem, IResponse } from "@suku-kahanamoku/common-module/types";
 
-export interface IAddress {
+export interface IAddress extends IItem {
   _id: string;
   street: string;
   city: string;
