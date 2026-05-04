@@ -1,4 +1,5 @@
 export default defineNuxtConfig({
+  compatibilityDate: "2026-05-04",
   modules: ["../src/module"],
   authModule: {},
   css: ["@/assets/css/main.css"],
@@ -23,6 +24,11 @@ export default defineNuxtConfig({
     ],
     experimental: {
       localeDetector: "./localeDetector.ts",
+    },
+  },
+  vite: {
+    optimizeDeps: {
+      include: ["@vue/devtools-core", "@vue/devtools-kit"],
     },
   },
 });
