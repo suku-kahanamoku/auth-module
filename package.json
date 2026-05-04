@@ -16,10 +16,6 @@
     "./types": {
       "types": "./dist/runtime/types.d.ts",
       "import": "./dist/runtime/types.d.ts"
-    },
-    "./models": {
-      "types": "./dist/runtime/models/index.d.ts",
-      "import": "./dist/runtime/models/index.js"
     }
   },
   "main": "./dist/module.mjs",
@@ -50,7 +46,6 @@
     "@suku-kahanamoku/form-module": "latest",
     "@suku-kahanamoku/lang-module": "latest",
     "@suku-kahanamoku/menu-module": "latest",
-    "@suku-kahanamoku/mongoose-module": "latest",
     "@suku-kahanamoku/notify-module": "latest",
     "@suku-kahanamoku/ui-module": "latest",
     "bcrypt": "^6.0.0",

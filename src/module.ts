@@ -89,22 +89,10 @@ export default defineNuxtModule<ModuleOptions>({
     // Kontrola zda token expiroval
     addServerPlugin(resolve("./runtime/server/plugins/auth"));
 
-    // Login api login endpoints
+    // Login api login endpoints (OAuth - google, facebook, linkedin)
     const apiLoginDir = resolve("./runtime/server/api/login");
     fs.readdirSync(apiLoginDir)?.forEach((file) => {
       GENERATE_API_ENDPOINT(file, "/api/login", resolve);
-    });
-
-    // Login api auth endpoints
-    const apiAuthDir = resolve("./runtime/server/api/auth");
-    fs.readdirSync(apiAuthDir)?.forEach((file) => {
-      GENERATE_API_ENDPOINT(file, "/api/auth", resolve);
-    });
-
-    // Login api auth endpoints
-    const apiAdminDir = resolve("./runtime/server/api/admin/user");
-    fs.readdirSync(apiAdminDir)?.forEach((file) => {
-      GENERATE_API_ENDPOINT(file, "/api/admin/user", resolve);
     });
 
     // Install auth utils module
@@ -125,11 +113,6 @@ export default defineNuxtModule<ModuleOptions>({
     // Install lang module
     if (!hasNuxtModule("@suku-kahanamoku/lang-module")) {
       await installModule("@suku-kahanamoku/lang-module");
-    }
-
-    // Install lang module
-    if (!hasNuxtModule("@suku-kahanamoku/mongoose-module")) {
-      await installModule("@suku-kahanamoku/mongoose-module");
     }
 
     // Install ui module
