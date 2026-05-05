@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.0.36
+
+[compare changes](https://undefined/undefined/compare/v1.0.35...v1.0.36)
+
+### 🏡 Chore
+
+- Update package-lock (5359839)
+
+### ❤️ Contributors
+
+- Suku <sukusovi@gmail.com>
+
 ## v1.0.35
 
 [compare changes](https://undefined/undefined/compare/v1.0.34...v1.0.35)
