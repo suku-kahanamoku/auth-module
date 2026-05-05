@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import {
   useToastify,
-  ref,
   useUrlResolver,
   useAsyncData,
   useLocalePath,
