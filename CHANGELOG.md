@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.0.35
+
+[compare changes](https://undefined/undefined/compare/v1.0.34...v1.0.35)
+
+### 🏡 Chore
+
+- Update dependencies (258fab2)
+
+### ❤️ Contributors
+
+- Suku <sukusovi@gmail.com>
+
 ## v1.0.34
 
 [compare changes](https://undefined/undefined/compare/v1.0.33...v1.0.34)
