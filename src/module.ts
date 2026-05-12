@@ -91,7 +91,11 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Login api login endpoints (OAuth - google, facebook, linkedin)
     const apiLoginDir = resolve("./runtime/server/api/login");
+    const projectLoginDir = `${_nuxt.options.srcDir}/server/api/login`;
     fs.readdirSync(apiLoginDir)?.forEach((file) => {
+      // Pokud projekt ma vlastni override pro tento soubor, preskocime registraci modulu
+      const projectOverride = `${projectLoginDir}/${file}`;
+      if (fs.existsSync(projectOverride)) return;
       GENERATE_API_ENDPOINT(file, "/api/login", resolve);
     });
 
