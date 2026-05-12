@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.0
+
+[compare changes](https://undefined/undefined/compare/v1.0.38...v1.1.0)
+
+### 🚀 Enhancements
+
+- Skip OAuth login endpoint registration if project has own override (65c00e6)
+
+### ❤️ Contributors
+
+- Suku <sukusovi@gmail.com>
+
 ## v1.0.38
 
 [compare changes](https://undefined/undefined/compare/v1.0.37...v1.0.38)
