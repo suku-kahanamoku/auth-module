@@ -93,9 +93,11 @@ export default defineNuxtModule<ModuleOptions>({
     const apiLoginDir = resolve("./runtime/server/api/login");
     const projectLoginDir = `${_nuxt.options.srcDir}/server/api/login`;
     fs.readdirSync(apiLoginDir)?.forEach((file) => {
-      // Pokud projekt ma vlastni override pro tento soubor, preskocime registraci modulu
-      const projectOverride = `${projectLoginDir}/${file}`;
-      if (fs.existsSync(projectOverride)) return;
+      // Porovnani bez pripony - projekt muze mit .ts zatimco modul ma .js/.d.ts
+      const baseName = file.replace(/\.(js|d\.ts)$/, "");
+      const projectOverrideTs = `${projectLoginDir}/${baseName}.ts`;
+      const projectOverrideJs = `${projectLoginDir}/${baseName}.js`;
+      if (fs.existsSync(projectOverrideTs) || fs.existsSync(projectOverrideJs)) return;
       GENERATE_API_ENDPOINT(file, "/api/login", resolve);
     });
 
