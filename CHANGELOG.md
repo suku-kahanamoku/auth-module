@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.3
+
+[compare changes](https://undefined/undefined/compare/v1.1.2...v1.1.3)
+
+### 🩹 Fixes
+
+- Add missing computed import to Login, Signup, ForgotPassword (98f870b)
+
+### ❤️ Contributors
+
+- Suku <sukusovi@gmail.com>
+
 ## v1.1.2
 
 [compare changes](https://undefined/undefined/compare/v1.1.1...v1.1.2)
