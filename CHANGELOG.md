@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.1
+
+[compare changes](https://undefined/undefined/compare/v1.1.0...v1.1.1)
+
+### 🩹 Fixes
+
+- Compare override filenames without extension (.ts vs .js) (605f283)
+
+### ❤️ Contributors
+
+- Suku <sukusovi@gmail.com>
+
 ## v1.1.0
 
 [compare changes](https://undefined/undefined/compare/v1.0.38...v1.1.0)
