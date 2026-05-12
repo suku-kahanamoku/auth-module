@@ -2,14 +2,10 @@
 import { ref } from "vue";
 import {
   useToastify,
-  useUrlResolver,
-  useAsyncData,
-  useLocalePath,
-  useMenuItems,
 } from "#imports";
 import defu from "defu";
 
-import { CLONE, ITERATE } from "@suku-kahanamoku/common-module/utils";
+import { ITERATE } from "@suku-kahanamoku/common-module/utils";
 import type { IFormField } from "@suku-kahanamoku/form-module/types";
 
 import fConfig from "../assets/configs/forgot_password.json";
@@ -17,35 +13,20 @@ import fConfig from "../assets/configs/forgot_password.json";
 // Definice props
 const props = defineProps<{
   ui?: Record<string, any>;
+  config?: Record<string, any>;
 }>();
 
-const { updateConfig } = useUrlResolver();
-const { route } = useMenuItems();
 const { display } = useToastify();
 const loading = ref();
 
-/**
- * Load config
- */
-const { data: config } = await useAsyncData(
-  async () => {
-    try {
-      const result = CLONE(fConfig);
-      updateConfig(route, result);
-      return result as typeof fConfig;
-    } catch (error: any) {
-      return {} as typeof fConfig;
-    }
-  },
-  { watch: [() => route.query] }
-);
+const activeConfig = computed(() => props.config ?? fConfig);
 
 async function onSubmit(body: Record<string, any>) {
-  if (config.value?.restUrl) {
+  if (activeConfig.value?.restUrl) {
     loading.value = true;
 
     try {
-      await $fetch(config.value.restUrl, { method: "POST", body });
+      await $fetch(activeConfig.value.restUrl, { method: "POST", body });
       // reset formulare
       ITERATE(body, (v, k) => (body[k] = undefined));
       display({ type: "success", message: "$.forgot_password.success_msg" });
@@ -59,7 +40,7 @@ async function onSubmit(body: Record<string, any>) {
 </script>
 <template>
   <CmpForm
-    :fields="(config?.fields as IFormField[])"
+    :fields="(activeConfig?.fields as IFormField[])"
     variant="subtle"
     :ui="defu(ui, { header: 'space-y-4' })"
     @submit="onSubmit"

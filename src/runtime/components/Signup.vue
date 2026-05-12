@@ -2,8 +2,6 @@
 import { ref } from "vue";
 import {
   useToastify,
-  useUrlResolver,
-  useAsyncData,
   useLocalePath,
   useMenuItems,
   navigateTo,
@@ -12,7 +10,6 @@ import {
 } from "#imports";
 import defu from "defu";
 
-import { CLONE } from "@suku-kahanamoku/common-module/utils";
 import type { IFormField } from "@suku-kahanamoku/form-module/types";
 
 import sConfig from "../assets/configs/signup.json";
@@ -20,38 +17,24 @@ import sConfig from "../assets/configs/signup.json";
 // Definice props
 const props = defineProps<{
   ui?: Record<string, any>;
+  config?: Record<string, any>;
 }>();
 
-const { updateConfig } = useUrlResolver();
 const localePath = useLocalePath();
-const { route, routes } = useMenuItems();
+const { routes } = useMenuItems();
 const { display } = useToastify();
 const { fetch } = useUserSession();
 const loading = ref();
 const runtimeConfig = useRuntimeConfig().public?.authModule as any;
 const protectedPages = runtimeConfig.protectedPages || [];
 
-/**
- * Load config
- */
-const { data: config } = await useAsyncData(
-  async () => {
-    try {
-      const result = CLONE(sConfig);
-      updateConfig(route, result);
-      return result as typeof sConfig;
-    } catch (error: any) {
-      return {} as typeof sConfig;
-    }
-  },
-  { watch: [() => route.query] }
-);
+const activeConfig = computed(() => props.config ?? sConfig);
 
 async function onSubmit(body: Record<string, any>) {
-  if (config.value?.restUrl) {
+  if (activeConfig.value?.restUrl) {
     loading.value = true;
     try {
-      await $fetch(config.value.restUrl, { method: "POST", body });
+      await $fetch(activeConfig.value.restUrl, { method: "POST", body });
       await fetch();
       await navigateTo(localePath(protectedPages[0] || "/"));
     } catch (error: any) {
@@ -63,7 +46,7 @@ async function onSubmit(body: Record<string, any>) {
 </script>
 <template>
   <CmpForm
-    :fields="(config?.fields as IFormField[])"
+    :fields="(activeConfig?.fields as IFormField[])"
     variant="subtle"
     :ui="defu(ui, { header: 'space-y-4' })"
     @submit="onSubmit"

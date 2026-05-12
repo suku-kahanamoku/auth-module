@@ -1,7 +1,7 @@
 import type { IItem, IResponse } from "@suku-kahanamoku/common-module/types";
 
 export interface IAddress extends IItem {
-  _id: string;
+  id: number | string;
   street: string;
   city: string;
   zip: string;

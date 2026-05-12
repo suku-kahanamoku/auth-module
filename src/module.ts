@@ -11,9 +11,6 @@ import {
   addServerPlugin,
 } from "@nuxt/kit";
 import defu from "defu";
-import * as fs from "node:fs";
-
-import { GENERATE_API_ENDPOINT } from "@suku-kahanamoku/common-module/server-utils";
 
 // Module options TypeScript interface definition
 export interface ModuleOptions {
@@ -88,18 +85,6 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Kontrola zda token expiroval
     addServerPlugin(resolve("./runtime/server/plugins/auth"));
-
-    // Login api login endpoints (OAuth - google, facebook, linkedin)
-    const apiLoginDir = resolve("./runtime/server/api/login");
-    const projectLoginDir = `${_nuxt.options.srcDir}/server/api/login`;
-    fs.readdirSync(apiLoginDir)?.forEach((file) => {
-      // Porovnani bez pripony - projekt muze mit .ts zatimco modul ma .js/.d.ts
-      const baseName = file.replace(/\.(js|d\.ts)$/, "");
-      const projectOverrideTs = `${projectLoginDir}/${baseName}.ts`;
-      const projectOverrideJs = `${projectLoginDir}/${baseName}.js`;
-      if (fs.existsSync(projectOverrideTs) || fs.existsSync(projectOverrideJs)) return;
-      GENERATE_API_ENDPOINT(file, "/api/login", resolve);
-    });
 
     // Install auth utils module
     if (!hasNuxtModule("nuxt-auth-utils")) {
