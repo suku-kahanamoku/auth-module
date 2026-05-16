@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.4
+
+[compare changes](https://undefined/undefined/compare/v1.1.3...v1.1.4)
+
+### 💅 Refactors
+
+- Remove IUser and IAddress interfaces, inline User type from PHP backend (86350a5)
+
+### ❤️ Contributors
+
+- Suku <sukusovi@gmail.com>
+
 ## v1.1.3
 
 [compare changes](https://undefined/undefined/compare/v1.1.2...v1.1.3)
